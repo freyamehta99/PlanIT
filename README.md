@@ -17,6 +17,11 @@ This is a basic task manager app made using flask. Apart from flask, we've used 
   * run python freyaapp.py
   * Visit the app at `http://localhost:5000`.
 
+# The App
+  * This is how the loin page will look like:
+  ![login](https://user-images.githubusercontent.com/36432258/39486146-c156f5a4-4d98-11e8-86c1-19afc98859d5.png)
+  * 
+
 
 # Flask
 
