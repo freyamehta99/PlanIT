@@ -1,0 +1,49 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>PlanIT!-User</title>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<style>
+      .container {
+        width: auto;
+        max-width: 680px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+</style>
+</head>
+<body>
+    <div id="wrap">
+      <div class="container">
+        <div class="masthead">
+                <ul class="nav nav-pills pull-right">
+                {% if user %}
+                        <li class="active"><a href="/accounts/logout">Logout</a></li>
+                        {% endif %}
+                        <!-------------------new line for profile added here---------------------->
+                {% if user %}
+                
+      
+                        <li class="profile"><a href="/user">Profile</a></li>
+                        
+                        {% endif %}
+                        <!------------------------------------------------------------------------>
+                </ul>
+            <h2 class="muted"><a href="/">PlanIT!</a><br> 
+        The task manager app
+        </div><!-- masthead -->
+	</br>
+	</hr>
+
+<fieldset>
+
+<legend><b><i> User's Profile </b></i></legend> 
+<div="details">
+<b> Username: </b> {% if user %}{{user}}{% endif %} </br></br>
+<b> Email-id: </b> {% if user %}{{user.email}}{% endif %}</br></br>
+</div>
+</fieldset>
+     
+</body>
+</html>

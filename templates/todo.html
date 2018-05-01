@@ -1,0 +1,105 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>PlanIT!-Home</title>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<style>
+      .container {
+        width: auto;
+        max-width: 680px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+</style>
+</head>
+<body>
+    <div id="wrap">
+      <div class="container">
+      	<div class="masthead">
+	        <ul class="nav nav-pills pull-right">
+    	    	{% if user %}
+        		<li class="active"><a href="/accounts/logout">Logout</a></li>
+	        	{% endif %}
+			<!-------------------new line for profile added here---------------------->
+    	    	{% if user %}
+		
+
+			<li class="profile"><a href="/user">Profile</a></li>
+			
+	        	{% endif %}
+			<!------------------------------------------------------------------------>
+	        </ul>
+    	    <h3 class="muted"><a href="/">PlanIT!</a><br> 
+        The task manager app
+      	</div><!-- masthead -->
+
+        <div class="page-header">
+          {% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		  <div class="alert">
+		    <ul class="flashes">
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		</div><!-- alert-->
+		  {% endif %}
+		{% endwith %}
+        </div><!-- pageheader-->
+
+      	<form action="/add" method="POST" class="form-inline" name="form">
+      		<fieldset>
+      			<legend>Add Task</legend>
+				<input name="task" type="text" class="input-xlarge" placeholder="Task"/>
+				<input name="tags" type="text" class="input-small" placeholder="Tags "/>
+				<input name="statusp" type="text" class="input-small" placeholder="Status "/>
+				<input name="created" type="date"  value="2018-04-30" class="input-small" />
+				<input name="due" type="date"  value="2018-04-30" class="input-small" />
+				<input type="submit" value="add" class="btn btn-primary"/>
+			</fieldset>
+		</form>
+
+		<h4>Open Tasks</h4>
+			<table class="table table-striped table-bordered table-hover">
+			<tr>
+				<th>&nbsp;</th>
+				<th><a href="/?sortby=title">Todo</a></th>
+				<th>Tags</th>
+				<th>Status</th>>	
+				<th><a href="/?sortby=due">Start</a></th>
+				<th><a href="/?sortby=due">Due</a></th>
+			</tr>
+			{% for todo in todos %}
+			<tr>
+				<td>
+					<form action="/del" method="POST" class="form-inline">
+						<input type="hidden" name="task" value="{{todo.id}}">
+						<label class="button"> 
+						<button type="submit" value="done" class="link">Erase</button>
+						</label>
+					</form>
+				</td>
+				<td>
+					{{todo.task}}
+				</td>
+				<td>
+					{% for tag in todo.tags %}
+						<span class="badge badge-success"><a href="/tag/{{tag.tag}}" style="color: #fff;">{{tag.tag}}</a></span>
+					{% endfor %}
+				</td>
+				<td>
+					{% for status in todo.statusp %}
+						<span class="badge badge-success"><a href="/status/{{status.status}}" style="color: #fff;">{{status.status}}</a></span>
+					{% endfor %}
+				</td>
+				<td>{{todo.created}}</td>
+				<td>{{todo.due}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		
+      </div><!-- container -->
+    </div><!-- #wrap -->
+</body>
+</html>
